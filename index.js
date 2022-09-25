@@ -14,9 +14,7 @@ app.use("/auth", userAuthRouter);
 app.use("/employees", emoployeesRouter);
 
 mongoose
-  .connect(
-    "mongodb+srv://Maxim:qwerty12345@cluster0.wjfjjkf.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(process.env?.MONGODB_URI)
   .then(() =>
     app.listen(PORT, () => console.log(`Server Running on Port: ${PORT}`))
   )
