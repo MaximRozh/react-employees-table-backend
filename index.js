@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 4444;
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => res.send("App is running"));
 app.use("/auth", userAuthRouter);
 app.use("/employees", emoployeesRouter);
 
