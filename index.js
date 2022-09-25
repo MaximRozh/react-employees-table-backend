@@ -4,7 +4,7 @@ import cors from "cors";
 import { userAuthRouter, emoployeesRouter } from "./routes/index.js";
 
 const app = express();
-const PORT = process.env.PORT || 4444;
+const PORT = process.env?.PORT || 4444;
 
 app.use(express.json());
 app.use(cors());
@@ -14,7 +14,10 @@ app.use("/auth", userAuthRouter);
 app.use("/employees", emoployeesRouter);
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    process.env?.MONGODB_URI ||
+      "mongodb+srv://Maxim:qwerty12345@cluster0.wjfjjkf.mongodb.net/employees-table?retryWrites=true&w=majority"
+  )
   .then(() =>
     app.listen(PORT, () => console.log(`Server Running on Port: ${PORT}`))
   )
