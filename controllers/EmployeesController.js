@@ -13,9 +13,8 @@ export const createEmployee = async (req, res) => {
       position,
     });
     const employee = await doc.save();
-    const total = await EmployeesModel.countDocuments({});
 
-    res.json({ employee, total });
+    res.json(employee);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -83,7 +82,6 @@ export const deleteEmployee = async (req, res) => {
 
     return res.json({
       success: true,
-      total,
       deletedId: deletedEmployee._id,
     });
   } catch (err) {
