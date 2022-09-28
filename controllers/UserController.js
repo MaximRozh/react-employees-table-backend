@@ -36,20 +36,22 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await UserModel.findOne({ email });
+
     if (!user)
       return res
         .status(404)
-        .json({ massage: "Login or password is incorrect" });
+        .json({ message: "Login or password is incorrect" });
 
     const isValidPassword = await bcrypt.compare(
       password,
       user._doc.passwordHash
     );
     if (!isValidPassword)
-      res.status(404).json({ massage: "Login or password is incorrect" });
+      return res
+        .status(404)
+        .json({ message: "Login or password is incorrect" });
 
     const token = jwt.sign(
       {
@@ -68,7 +70,7 @@ export const login = async (req, res) => {
       token,
     });
   } catch (err) {
-    res.status(500).json({ massage: "Something went wrong" });
+    res.status(500).json({ message: "Something went wrong" });
   }
 };
 

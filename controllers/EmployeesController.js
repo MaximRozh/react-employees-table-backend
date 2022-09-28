@@ -78,7 +78,6 @@ export const deleteEmployee = async (req, res) => {
     const deletedEmployee = await EmployeesModel.findByIdAndDelete({
       _id: employeeId,
     });
-    const total = await EmployeesModel.countDocuments({});
 
     return res.json({
       success: true,
